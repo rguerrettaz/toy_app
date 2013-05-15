@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
+  <!-- CSS for icons -->
+  <link href="/webfonts/ss-pika.css" media="all" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="/js/main.js"></script>
 
   <title></title>
 </head>
 <body>
+  <%= erb :_sidenav %>
   <%= yield %>
 </body>
 </html>
