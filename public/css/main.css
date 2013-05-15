@@ -1,0 +1,50 @@
+section {
+  height: 600px;
+  width: 100%;
+  margin: 0;
+
+}
+
+h1,p {
+  margin: 0;
+}
+
+.sidenav {
+  position: fixed;
+  left: 0;
+  height: 100%;
+  width: 120px;
+  background-color: #5CB69C;
+  /*border-right: 1px solid black;*/
+}
+
+.navlist {
+  list-style: none;
+  padding: 20px;
+}
+
+.compass{
+  position: fixed;
+  left: 120px;
+  top: 30px;
+}
+
+#intro {background-color: #92cdbc;}
+#about { background-color: #76829D;}
+#example {background-color: #FAF5E6;}
+#experience {background-color: #EB5D40;}
+#connect {background-color: #fffcf5;}
+
+
+
+#test3{  background-color: #EB5055;}
+
+#test5{  background-color: #449BB5;}
+/*#test6{  background-color: #F5E653;}*/
+#test7{  background-color: #68C39F;}
+
+
+
+#test10{  background-color: #30C4C6;}
+
+
