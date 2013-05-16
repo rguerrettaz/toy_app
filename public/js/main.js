@@ -102,7 +102,10 @@ function findCurrentSection(){
   var portfolioSectionFourFontColor = "#D3F5FF"
   var connectSectionFiveFontColor   = "#73A5D6"
 
-  if (0 < windowPosition && windowPosition < pageHeight) {
+  if (windowPosition === 0) {
+    updateFontColor(introSectionTopPosition(), introSectionOneFontColor, introSectionOneFontColor)
+  }
+  else if (0 < windowPosition && windowPosition < pageHeight) {
     updateFontColor(aboutSectionTopPosition(), aboutSectionTwoFontColor, introSectionOneFontColor)
   }
   else if (pageHeight <= windowPosition && windowPosition < (pageHeight*2)){
