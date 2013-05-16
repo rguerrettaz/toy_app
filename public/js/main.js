@@ -9,6 +9,7 @@ $(function(){
   setSidebarHeight()
   setSidebarListItemMargins()
   updateBottomPadding()
+  findCurrentSection()
 
   // listens for window resize
   $win.resize(updateSidebarsAndSections)
@@ -16,8 +17,7 @@ $(function(){
   // controls compass arrow. NEEDS a refactor
   $(document).scroll(function(){
     $('.compass').css("top", $win.height() * ($win.scrollTop() / $(this).height())+ 35)
-    updateConnectSectionTopPosition()
-    updateFontColor()
+    findCurrentSection()
   })
 });
 
@@ -47,8 +47,24 @@ function setSidebarListItemMargins(){
   $('.navlist li').css("margin-bottom", margin)
 }
 
-function updateConnectSectionTopPosition(){
-  $connectSectionPosition = $('#connect').offset().top - $(window).scrollTop()
+function introSectionTopPosition(){
+  return $('#intro').offset().top - $win.scrollTop()
+}
+
+function aboutSectionTopPosition(){
+  return $('#about').offset().top - $win.scrollTop()
+}
+
+function skillsSectionTopPosition(){
+  return $('#skills').offset().top - $win.scrollTop()
+}
+
+function portfolioSectionTopPosition(){
+  return $('#portfolio').offset().top - $win.scrollTop()
+}
+
+function connectSectionTopPosition(){
+  return $('#connect').offset().top - $win.scrollTop()
 }
 
 function updateBottomPadding(){
@@ -57,19 +73,45 @@ function updateBottomPadding(){
 
 // REFACTOR ME
 // Updates font color based on position of connect section
-function updateFontColor(){
+function updateFontColor(sectionTop, color, previousColor){
   var liList = [5,4,3,2,1]
 
   for (var i = 0, len = liList.length; i < len; i++) {
     var $liItem = $('li:nth-child(' + liList[i] + ')')
     var position = $win.height() - bottomPadding - (margin + 17)   * i
-
-    if (position >= $connectSectionPosition) {
-      $liItem.css("color", "white")
+    var color = color
+    var previousColor = previousColor
+    if (position >= sectionTop) {
+      $liItem.css("color", color)
     }
     else {
-      $liItem.css("color", "black")
+      $liItem.css("color", previousColor)
     }
   }
 }
 
+// REFACTOR ME
+// Listener for all sections - to update font color
+// Sets all font colors for each section
+function findCurrentSection(){
+  var windowPosition = $win.scrollTop()
+  var pageHeight = $win.height()
+  var introSectionOneFontColor      = "#36705F"
+  var aboutSectionTwoFontColor      = "#B2BDD6"
+  var skillsSectionThreeFontColor   = "#FFB2B2"
+  var portfolioSectionFourFontColor = "#D3F5FF"
+  var connectSectionFiveFontColor   = "#73A5D6"
+
+  if (0 < windowPosition && windowPosition < pageHeight) {
+    updateFontColor(aboutSectionTopPosition(), aboutSectionTwoFontColor, introSectionOneFontColor)
+  }
+  else if (pageHeight <= windowPosition && windowPosition < (pageHeight*2)){
+    updateFontColor(skillsSectionTopPosition(), skillsSectionThreeFontColor, aboutSectionTwoFontColor)
+  }
+  else if ((pageHeight*2) <= windowPosition && windowPosition < (pageHeight*3)){
+    updateFontColor(portfolioSectionTopPosition(), portfolioSectionFourFontColor, skillsSectionThreeFontColor)
+  }
+  else if ((pageHeight*3) <= windowPosition && windowPosition < (pageHeight*4)){
+    updateFontColor(connectSectionTopPosition(), connectSectionFiveFontColor, portfolioSectionFourFontColor)
+  }
+}
