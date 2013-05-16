@@ -16,8 +16,9 @@ $(function(){
 
   // controls compass arrow. NEEDS a refactor
   $(document).scroll(function(){
-    $('.compass').css("top", $win.height() * ($win.scrollTop() / $(this).height())+ 35)
+    $('.compass').css("top", $win.height() * ($win.scrollTop() / $(this).height())+ 20)
     findCurrentSection()
+    scrollDirectionDetector()
   })
 });
 
@@ -103,6 +104,7 @@ function findCurrentSection(){
   var connectSectionFiveFontColor   = "#73A5D6"
 
   if (windowPosition === 0) {
+    console.log(windowPosition)
     updateFontColor(introSectionTopPosition(), introSectionOneFontColor, introSectionOneFontColor)
   }
   else if (0 < windowPosition && windowPosition < pageHeight) {
@@ -118,3 +120,25 @@ function findCurrentSection(){
     updateFontColor(connectSectionTopPosition(), connectSectionFiveFontColor, portfolioSectionFourFontColor)
   }
 }
+
+// Tells if user is scrolling up or down
+var lastScrollTop = 0
+function scrollDirectionDetector(){
+  var currentScrollTop = $(window).scrollTop();
+  if (lastScrollTop < currentScrollTop){
+    pointCompassDown()
+  }
+  else {
+    pointCompassUp()
+  }
+  lastScrollTop = currentScrollTop
+}
+
+function pointCompassUp(){
+  $('.nav i').text("navigateup")
+}
+
+function pointCompassDown(){
+  $('.nav i').text("navigatedown")
+}
+

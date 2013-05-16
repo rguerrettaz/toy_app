@@ -32,8 +32,12 @@ a {
 
 .compass{
   position: fixed;
-  left: 120px;
-  top: 35px;
+  left: 85px;
+  top: 20px;
+}
+
+.icon {
+  font-size: 30px;
 }
 
 #intro {
